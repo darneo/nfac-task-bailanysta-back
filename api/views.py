@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics, permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from utils.s3 import *
 from .models import Profile, Post, Comment, Like , Follow, Notification
@@ -373,3 +374,7 @@ class ProfileListView(APIView):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(profiles, many=True)
         return Response(serializer.data)
+
+
+def health_check(request):
+    return JsonResponse({'status': 'ok'}, status=200)

@@ -13,10 +13,11 @@ from .views import (
     follow_user,
     unfollow_user,
     check_following_status,
-    SearchView, NotificationListView, ProfileListView
+    SearchView, NotificationListView, ProfileListView, health_check
 )
 
 urlpatterns = [
+    path('health/', health_check, name='health-check'),
     path('auth/register/', register, name='register'),
     path('auth/login/', TokenObtainPairView.as_view(), name='login'),
     path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
